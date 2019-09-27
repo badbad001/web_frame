@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>layui模板</title>
+    <link rel="stylesheet" href="resources/layui/css/layui.css">
+    <!--引进dtree的样式-->
+    <link rel="stylesheet" href="resources/layui_ext/dtree/dtree.css">
+    <link rel="stylesheet" href="resources/layui_ext/dtree/font/dtreefont.css">
+
+    <!--另外一种可用的下拉树方案要的css-->
+    <style type="text/css">
+        .select-test{position: absolute;max-height: 500px;height: 350px;overflow: auto;width: 100%;z-index: 123;display: none;border:1px solid silver;top: 42px;}
+        .layui-show{display: block!important;}
+    </style>
+
+</head>
+<body>
+
+
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+    <legend>其他可实现功能的下拉树</legend>
+</fieldset>
+<div class="layui-form layui-form-panel">
+    <div class="layui-form-item">
+        <label class="layui-form-label">城市：</label>
+        <div class="layui-input-block">
+            <div class="layui-unselect layui-form-select" id="inputDiv">  <!--input框外层div-->
+                <div class="layui-select-title">
+                    <!--这个是选择的input框-->
+                    <input type="text" name="city" id="input_city" placeholder="请选择" readonly="" class="layui-input layui-unselect">
+                    <i class="layui-edge"></i>
+                </div>
+            </div>
+            <div class="layui-card select-test" id="menuDiv"> <!--下拉树外层div-->
+                <div class="layui-card-body">
+                    <div id="toolbarDiv">
+                        <!--这个是下来的渲染的dTree-->
+                        <ul id="menuTree" class="dtree" data-id="0" style="width: 100%;"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--layui的js-->
+<script src="resources/layui/layui.js"></script>
+<script>
+    layui.extend({
+        dtree: 'resources/layui_ext/dtree/dtree'   // {/}的意思即代表采用自有路径，即不跟随 base 路径
+    }).use(['dtree','layer','jquery'], function(){
+           var dtree = layui.dtree;
+           var $ = layui.jquery;
+           var layer = layui.layer;
+
+        // js代码，省略了layui定义引用部分
+        var DTree = dtree.render({
+            elem: "#menuTree",   //树渲染的id
+            url: "resources/json/layui风格和list风格组合(重点).json",
+            dataStyle: "layuiStyle",  //使用layui风格的数据格式
+            dataFormat: "list",  //配置data的风格为list
+            response:{message:"msg",statusCode:0},  //修改response中返回数据的定义
+            icon: "2",
+            accordion:true //可下来可折叠
+        });
+
+        //input框的点击事件
+        $("#inputDiv").on("click",function(){
+            //给当前input框加选中的样式
+            $(this).toggleClass("layui-form-selected");
+            //给下拉树加样式  layui-show样式是点击，然后树就出来
+            $("#menuDiv").toggleClass("layui-show layui-anim layui-anim-upbit");
+        });
+
+        //节点的选择事件
+        dtree.on("node(menuTree)", function(obj){
+            $("#input_city").val(obj.param.context); //把节点选中的内容标题写到input框
+            //绑定样式 选中
+            $("#inputDiv").toggleClass("layui-form-selected");
+            //给下拉树加样式  layui-show样式是点击，然后树就出来
+            $("#menuDiv").toggleClass("layui-show layui-anim layui-anim-upbit");
+        });
+    })
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>layui模板</title>
+    <link rel="stylesheet" href="resources/layui/css/layui.css">
+</head>
+<body>
+<font color="red" id="demo" style="display: none">你好asdasdasdas</font>
+<!--layui的js-->
+<script src="resources/layui/layui.js"></script>
+<script>
+    layui.use(['colorpicker','jquery','element','layer'], function(){
+        var $ = layui.jquery;
+        var layer = layui.layer;
+        /*配制全局默认弹出层皮肤*/
+        layer.config({
+            skin: 'layui-layer-molv'
+        })
+        layer.open({
+            type: 0,
+            content: '你好',
+            //这里content是一个普通的String
+            skin:'layui-layer-molv',//自定义单个
+           // area: ['500px', '300px'],
+            anim: 6,
+
+        });
+
+
+    })
+</script>
+
+</body>
+</html>

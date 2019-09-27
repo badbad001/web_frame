@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>layui模板</title>
+    <link rel="stylesheet" href="resources/layui/css/layui.css">
+    <!--引进dtree的样式-->
+    <link rel="stylesheet" href="resources/layui_ext/dtree/dtree.css">
+    <link rel="stylesheet" href="resources/layui_ext/dtree/font/dtreefont.css">
+</head>
+<body>
+
+<button type="button" id="btn1" type="button" class="layui-btn">选中某个</button>
+<button type="button" id="btn2" type="button" class="layui-btn">获取选中的值</button>
+<button type="button" id="btn3" type="button" class="layui-btn">获取复选框选中</button>
+
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+    <legend>layui风格和list集合组合数据格式（dataFormat）</legend>
+</fieldset>
+<ul id="demoTree" class="dtree" data-id="0"></ul>
+
+<!--layui的js-->
+<script src="resources/layui/layui.js"></script>
+<script>
+    layui.extend({
+        dtree: 'resources/layui_ext/dtree/dtree'   // {/}的意思即代表采用自有路径，即不跟随 base 路径
+    }).use(['dtree','layer','jquery'], function(){
+           var dtree = layui.dtree;
+           var $ = layui.jquery;
+           var layer = layui.layer;
+
+        /*laylist数据风格*/
+        // 初始化树
+        var DemoTree = dtree.render({
+            elem: "#demoTree",
+            url: "resources/json/layui风格和list风格组合(重点).json",
+            dataStyle: "layuiStyle",  //使用layui风格的数据格式
+            dataFormat: "list",  //配置data的风格为list
+            response:{message:"msg",statusCode:0},  //修改response中返回数据的定义
+            checkbar:true //开启复选框
+        });
+
+        /*树状态改变*/
+        dtree.on("changeTree('demoTree')" ,function(obj){
+            console.log(obj.param); // 点击当前节点传递的参数
+            console.log(obj.dom); // 当前节点的jquery对象
+            console.log(obj.show); // 节点展开为true，关闭为false
+        });
+
+        /*单击事件*/
+        dtree.on("node('demoTree')" ,function(obj){
+            console.log(obj.param); // 点击当前节点传递的参数
+            console.log(obj.dom); // 当前节点的jquery对象
+            console.log(obj.childParams); // 当前节点的所有子节点参数
+            console.log(obj.parentParam); // 当前节点的父节点参数
+        });
+
+
+        /*选中某个*/
+        $("#btn1").click(function () {
+            var params = dtree.dataInit("demoTree", "001001");
+
+        })
+
+        /*获取当前选中值*/
+        /*这个是选中，并不是选择中前面的复选框*/
+        $("#btn2").click(function () {
+            /*获取当前树的选*/
+            var param = dtree.getNowParam(DemoTree);
+            layer.msg(JSON.stringify(param));
+            console.log(JSON.stringify(param))
+
+        })
+
+        //dtree.initNoAllCheck("demoTree");
+        $("#btn3").click(function () {
+            /*获取当前树的选*/
+            var param = dtree.initNoAllCheck("demoTree");
+            layer.msg(JSON.stringify(param));
+            console.log(JSON.stringify(param))
+
+        })
+
+    })
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/layui_demo/layui_demo.iml" filepath="$PROJECT_DIR$/layui_demo/layui_demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/layui_upload/layui_upload.iml" filepath="$PROJECT_DIR$/layui_upload/layui_upload.iml" />
+      <module fileurl="file://$PROJECT_DIR$/layuicms_test/layuicms_test.iml" filepath="$PROJECT_DIR$/layuicms_test/layuicms_test.iml" />
+    </modules>
+  </component>
+</project>

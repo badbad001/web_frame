@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>layui模板</title>
+    <link rel="stylesheet" href="resources/layui/css/layui.css">
+</head>
+<body>
+<ul class="layui-nav" lay-filter="">
+    <li class="layui-nav-item"><a href="">最新活动</a></li>
+    <li class="layui-nav-item layui-this"><a href="">产品</a></li>
+    <li class="layui-nav-item"><a href="">大数据</a></li>
+    <li class="layui-nav-item">
+        <a href="javascript:;">解决方案</a>
+        <dl class="layui-nav-child"> <!-- 二级菜单 -->
+            <dd><a href="">移动模块</a></dd>
+            <dd class="layui-this"><a href="">后台模版</a></dd>
+            <dd><a href="">电商平台</a></dd>
+        </dl>
+    </li>
+    <li class="layui-nav-item"><a href="">社区</a></li>
+    <li class="layui-nav-item" style="float: right">
+        <a href=""><img src="//t.cn/RCzsdCq" class="layui-nav-img">我</a>
+        <dl class="layui-nav-child">
+            <dd><a href="javascript:;">修改信息</a></dd>
+            <dd><a href="javascript:;">安全管理</a></dd>
+            <dd><a href="javascript:;">退了</a></dd>
+        </dl>
+    </li>
+</ul>
+
+<ul class="layui-nav layui-nav-tree" lay-filter="">
+    <li class="layui-nav-item"><a href="">最新活动</a></li>
+    <li class="layui-nav-item layui-this"><a href="">产品</a></li>
+    <li class="layui-nav-item"><a href="">大数据</a></li>
+    <li class="layui-nav-item">
+        <a href="javascript:;">解决方案</a>
+        <dl class="layui-nav-child"> <!-- 二级菜单 -->
+            <dd><a href="">移动模块</a></dd>
+            <dd><a href="">后台模版</a></dd>
+            <dd><a href="">电商平台</a></dd>
+        </dl>
+    </li>
+    <li class="layui-nav-item"><a href="">社区</a></li>
+</ul>
+
+<!--layui的js-->
+<script src="resources/layui/layui.js"></script>
+<script>
+    layui.use(['element'],function () {
+        
+    })
+</script>
+</body>
+</html>

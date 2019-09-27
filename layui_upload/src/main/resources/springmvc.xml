@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--配制组件扫描，只扫描controller和controllerAdvice的-->
+    <context:component-scan base-package="cn.itcast.controller" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+    </context:component-scan>
+
+    <!--配制内部资源处理器-->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/pages/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+
+    <!--配置文件上传解析器-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--保证与上传表单所在的Jsp页面的编码一致.-->
+        <property name="defaultEncoding" value="utf-8"/>
+        <!--使用#{}来计算上传文件大小-->
+        <property name="maxUploadSize" value="#{1024*1024*20}"/>
+        <!--文件上传的基础路径-->
+        <!-- 设置文件上传的临时目录 -->
+       <!-- <property name="uploadTempDir"  value="upload/temp"/>-->
+    </bean>
+
+    <!--配制把静态资源交给tomcat处理-->
+    <mvc:default-servlet-handler/>
+
+    <!--配制mvc的注解驱动,mvc的开挂模式-->
+    <mvc:annotation-driven/>
+
+</beans>

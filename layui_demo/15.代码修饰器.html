@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>layui模板</title>
+    <link rel="stylesheet" href="resources/layui/css/layui.css">
+</head>
+<body>
+<pre class="layui-code">//在里面存放任意的代码
+Lay.fn.event = function(modName, events, params){
+  var that = this, result = null, filter = events.match(/\(.*\)$/)||[];
+  var set = (events = modName + '.'+ events).replace(filter, '');
+};
+      </pre>
+
+<!--layui的js-->
+<script src="resources/layui/layui.js"></script>
+<script>
+    layui.use(['colorpicker','jquery','element','layer','code'], function(){
+        var $ = layui.jquery;
+        layui.code({
+            title: 'NotePad++的风格'
+            ,skin: 'notepad' //如果要默认风格，不用设定该key。
+        });
+    })
+</script>
+
+</body>
+</html>

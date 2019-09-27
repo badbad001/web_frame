@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>layui模板</title>
+    <link rel="stylesheet" href="resources/layui/css/layui.css">
+
+</head>
+<body>
+<button type="button" type="button" class="layui-btn layui-btn-primary">原始按钮</button>
+<button type="button" type="button" class="layui-btn">默认按钮</button>
+<button type="button" type="button" class="layui-btn layui-btn-normal">百搭按钮</button>
+<button type="button" type="button" class="layui-btn layui-btn-warm">暖色按钮</button>
+<button type="button" type="button" class="layui-btn layui-btn-danger">警告按钮</button>
+<button type="button" type="button" class="layui-btn layui-btn-disabled">禁用按钮</button>
+<br><br>
+
+<button type="button" type="button" class="layui-btn layui-btn-lg">大型按钮</button>
+<button type="button" type="button" class="layui-btn">默认按钮</button>
+<button type="button" type="button" class="layui-btn layui-btn-sm">小型按钮</button>
+<button type="button" class="layui-btn layui-btn-xs">迷你按钮</button>
+
+<br><br>
+
+<button type="button" class="layui-btn layui-icon layui-icon-face-smile">默认按钮</button>
+<button type="button" class="layui-btn"><span class="layui-icon layui-icon-face-smile"></span>默认按钮</button>
+
+<br><br>
+
+<button type="button" type="button" class="layui-btn layui-btn-lg layui-btn-normal">大型百搭</button>
+<button type="button" type="button" class="layui-btn layui-btn-warm">正常暖色</button>
+<button type="button" type="button" class="layui-btn layui-btn-sm layui-btn-danger">小型警告</button>
+<button type="button" type="button" class="layui-btn layui-btn-xs layui-btn-disabled">禁用</button>
+
+<br><br>
+
+<button type="button" class="layui-btn">增加</button>
+<button type="button" class="layui-btn">编辑</button>
+<button type="button" class="layui-btn">删除</button>
+
+<br><br>
+<button type="button"class="layui-btn layui-btn-warm layui-btn-radius">正常暖色</button>
+<!--layui的js-->
+<script src="resources/layui/layui.js"></script>
+
+<script>
+    //在layui里面，jquery作为模板使用
+    layui.use(["jquery"],function () {
+        //使用了jq,先获取jq的引用
+        var $ = layui.jquery;
+        $(".layui-btn").click(function () {
+            alert(this.innerHTML);
+        })
+    })
+</script>
+</body>
+</html>

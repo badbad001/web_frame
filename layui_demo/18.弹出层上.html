@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>layui模板</title>
+    <link rel="stylesheet" href="resources/layui/css/layui.css">
+</head>
+<body>
+<button type="button" type="button" class="layui-btn" id="btn1">alert</button>
+<button type="button" type="button" class="layui-btn" id="btn2">confirm</button>
+<button type="button" type="button" class="layui-btn" id="btn3">prompt</button>
+<button type="button" type="button" class="layui-btn" id="btn4">tab</button>
+<button type="button" type="button" class="layui-btn" id="btn5">photos</button>
+<button type="button" type="button" class="layui-btn" id="btn6">msg</button>
+<button type="button" type="button" class="layui-btn" id="btn7">tips</button>
+<!--layui的js-->
+<script src="resources/layui/layui.js"></script>
+<script>
+    layui.use(['colorpicker','jquery','element','layer'], function(){
+        var $ = layui.jquery;
+        var layer = layui.layer;
+        $("#btn1").click(function () {
+            layer.alert('只想简单的提示');
+            layer.alert('有了回调', function(index){
+                //do something
+                layer.close(index); //回调函数，点击确定的回调，关闭弹出层
+                //是要根据索引来关闭
+                //layer.alert的返回值就是索引
+            });
+        })
+
+        /*确认框*/
+        $("#btn2").click(function () {
+            layer.confirm('is not?', {icon: 3, title:'提示'}, function(index){
+                //do something
+
+                layer.close(index);
+            });
+
+        })
+
+        /*prompt*/
+        $("#btn3").click(function () {
+            //例子1
+           /* layer.prompt(function(value, index, elem){
+                alert(value); //得到value
+                layer.close(index);
+            });*/
+
+            //例子2
+            layer.prompt({
+                formType: 2,
+                value: '初始值',
+                title: '请输入值',
+                area: ['800px', '350px'] //自定义文本域宽高
+            }, function(value, index, elem){
+                alert(value); //得到value
+                layer.close(index);
+            })
+
+        })
+
+
+        /*tab*/
+        $("#btn4").click(function () {
+
+            layer.tab({
+                area: ['600px', '300px'],
+                tab: [{
+                    title: 'TAB1',
+                    content: '内容1'
+                }, {
+                    title: 'TAB2',
+                    content: '内容2'
+                }, {
+                    title: 'TAB3',
+                    content: '内容3'
+                }]
+            });
+        })
+        /*图片*/
+        $("#btn5").click(function () {
+
+            $.getJSON('resources/json/img.json', function(json){
+                layer.photos({
+                    photos: json
+                    ,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+                });
+            });
+        })
+
+        $("#btn6").click(function () {
+
+            layer.msg('有表情地提示', {icon: 6});
+        })
+        $("#btn7").click(function () {
+
+            layer.tips('在上面', '#btn7', {
+                tips: 1
+            });
+        })
+
+    })
+</script>
+
+</body>
+</html>

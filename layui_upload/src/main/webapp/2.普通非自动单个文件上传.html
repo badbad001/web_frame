@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>layui模板</title>
+    <link rel="stylesheet" href="resources/layui/css/layui.css">
+</head>
+<body>
+
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+    <legend>选完文件后不自动上传</legend>
+</fieldset>
+
+<div class="layui-upload">
+    <button type="button" class="layui-btn layui-btn-normal" id="test8">选择文件</button>
+    <button type="button" class="layui-btn" id="test9">开始上传</button>
+
+    <div class="layui-upload-list">
+        <img class="layui-upload-img" id="demo1" width="100px" height="100px">
+        <p id="demoText"></p>
+    </div>
+</div>
+
+<!--layui的js-->
+<script src="resources/layui/layui.js"></script>
+<script>
+    layui.use(['colorpicker','jquery','element','layer','upload'], function(){
+        var $ = layui.jquery;
+
+        var upload = layui.upload;
+
+        var uploadInst = upload.render({
+            elem: '#test8'
+            ,url: 'file/upload/'
+            ,auto: false
+            ,accept:'images'
+            ,acceptMime:'image/*'
+            ,bindAction: '#test9'
+            ,field:'mf'
+            ,choose: function(obj){   //所以用chooose来选择的回调方法
+                //选择就回调
+                //预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result){
+                    $('#demo1').attr('src', result); //图片链接（base64）
+                });
+            }
+            ,done: function(res){
+                //如果上传失败
+                if(res.code > 0){
+                    return layer.msg('上传失败');
+                }
+                //上传成功
+            }
+            ,error: function(){
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function(){
+                    uploadInst.upload();
+                });
+            }
+        });
+    })
+</script>
+
+</body>
+</html>
